@@ -23,9 +23,7 @@ export default class About extends Component {
     
   }
 
-    openMenu = () => {
-    this.props.navigation.openDrawer()
-  }
+  
 
    submit = () => {
        if (this.state.name && this.state.email && this.state.mobile )
@@ -39,56 +37,9 @@ export default class About extends Component {
        }
    }
 
-  signUp = () =>{
-    this.setState(() => ({ cardheight:370}));
-    if ( !service.validateEmail(this.state.email)) {
-      this.setState(() => ({ emailFormatError: "Proper Email Format is Required"}));
-    } 
-    else{
-      this.setState(() => ({ emailFormatError: ''}));
-    }
-    if (this.state.email.trim() === "") {
-      this.setState(() => ({ emailError: " Email is required."}));
-      this.setState(() => ({ emailFormatError: null}));
-    } else {
-      this.setState(() => ({ emailError: null})); 
-    }
-    if (this.state.password.trim() === "") {
-      this.setState(() => ({ passwordError: " Password is required."}));
-    } else {
-      this.setState(() => ({ passwordError: null}));
-    }
-    if (this.state.mobile.trim() === "") {
-      this.setState(() => ({ mobileError: " Mobile Number is required."}));
-    } else {
-      this.setState(() => ({ mobileError: null}));
-    }
-    if (this.state.confirmPassword.trim() === "") {
-      this.setState(() => ({ confirmPasswordError: " Confirm Password is required."}));
-    } else {
-      this.setState(() => ({ confirmPasswordError: null}));
-    }
-    if(this.state.email && this.state.mobile && this.state.password && this.state.confirmPassword)
-    {
-      this.setState(() => ({ cardheight:300}));
-    }
-
-    if(this.state.email && this.state.password && this.state.mobile && this.state.confirmPassword && service.validateEmail(this.state.email))
-    {
-      
-     this.setState ({ loading: true});
-      setTimeout(() => 
-      {this.setState({loading: false})
-      this.refs.defaultToastBottom.ShowToastFunction('SignUp SuccessFully');
-      this.props.navigation.navigate('Login')
-       }, 3000)
-      }
-
-  
-   // alert(this.state.password)
-   }
+ 
    goBack = () =>{
-    this.props.navigation.pop()
+    this.props.navigation.navigate('Login')
    }
   render() {
       const  NewImage =   <Image source={require('../images/78.png')} style={styles.profilePic}/>
@@ -104,7 +55,28 @@ export default class About extends Component {
                     <Image style={{width:30,marginRight:10,  height:30}}></Image>
                     </TouchableOpacity>
                 </View>
-               
+                               <ScrollView>
+                  <View style={styles.middleContainer}>
+                <Text>  Dear All,
+{"\n"}
+We are happy to announce the launch of Our Own innovative Mobile App for Keshri Samaj, Developed under the guidance of Active members of Keshri Samaj, Barhi, Hazaribagh.
+{"\n"}{"\n"}
+This app is  for each individual of keshariwani's community & this will help to fulfill complete requirements of Matrimonial, Business & Professional career.{"\n"}{"\n"} In next version we will have additional features of Events, Communication etc The mobile Application has following modules. Registration, Login, OTP Verification, My Profile, Multiple Matrimonial Profile, Creation for Family members using Single Account, Browse Matrimonial Profile, Send request, Messaging, Members List, Profile matching & Acceptance
+
+Your Feedbacks will be important to us. {"\n"} Please write your feedback & comments to improve the App.{"\n"}{"\n"}
+{"\n"}
+Thanks
+{"\n"} 
+</Text>
+   <View style={{flexDirection:'row'}}>
+<Text style={{color:"#ff3f34", width:"50%"}}>
+Shri Prameshwar Prasad Keshri                             
+Barhi,Jharkhand, Keshawani Samaj</Text>
+<Text style={{marginLeft:20, width:"50%", color:"#ff3f34"}}>Developed & Maintained By
+Pramod Kumar & Jyoti Keshri 
+ 9356704158</Text></View>         
+   </View>
+     </ScrollView>
       </View>
       
     );

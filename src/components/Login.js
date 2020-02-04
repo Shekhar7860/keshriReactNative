@@ -27,18 +27,21 @@ signUp = () => {
  // alert(JSON.stringify(this.props))
   this.props.navigation.navigate('Register')
 }
+forgot = () => {
+ // alert(JSON.stringify(this.props))
+  this.props.navigation.navigate('Forgot')
+}
+help = () => {
+ // alert(JSON.stringify(this.props))
+  this.props.navigation.navigate('Tabs')
+}
+
+verify = () => {
+ // alert(JSON.stringify(this.props))
+  this.props.navigation.navigate('Verify')
+}
   componentDidMount = () => {
-    // GoogleSignin.configure({
-    //   scopes: ['openid', 'email', 'profile'],
-    //   shouldFetchBasicProfile: true,// what API you want to access on behalf of the user, default is email and profile
-    //   webClientId: '1012229639116-h85hqugmo9iaunhk5o1pla9t7p5b5lcn.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
-    //   offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-    //   hostedDomain: '', // specifies a hosted domain restriction
-    //   loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
-    //   forceConsentPrompt: true, // [Android] if you want to show the authorization prompt at each login.
-    //   accountName: '', // [Android] specifies an account name on the device that should be used
-    //   iosClientId: '<FROM DEVELOPER CONSOLE>', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
-    // });
+  
     this.setState({loading : true})
     setTimeout (() => this.setState({loading : false }), 2000)
   }
@@ -77,29 +80,32 @@ signUp = () => {
     {
    
       
-       if ( service.validateEmail(this.state.email)) {
+       if (this.state.mobile && this.state.password ) {
          this.setState({visible : true})
-          service.login(this.state.email, this.state.password).then((res) => {
-            if(res.success == true) {
-          this.setState({visible : false})
-          alert(JSON.stringify(res))
+          service.login(this.state.mobile, this.state.password).then((res) => {
+            console.log(res, 'resssssss')
+        //     if(res.success == true) {
+           this.setState({visible : false})
+           if(res.status == false){
+             Alert.alert(res.message)
+           }
         
-          // this.props.actions.logindata(res)
-          // this.props.navigation.navigate('Home2')
+        //   // this.props.actions.logindata(res)
+        //   // this.props.navigation.navigate('Home2')
 
-        }
-        else{
-            var data = {name : "shekhar", userId : 21}
-          service.saveUserData('user', data)
-           Alert.alert(res.message)
-            this.setState({visible : false})
-           this.props.actions.logindata(res)
-           this.props.navigation.navigate('Home2')
-        }
+        // }
+        // else{
+        //     var data = {name : "shekhar", userId : 21}
+        //   service.saveUserData('user', data)
+        //    Alert.alert(res.message)
+        //     this.setState({visible : false})
+        //    this.props.actions.logindata(res)
+        //    this.props.navigation.navigate('Home2')
+        // }
                       })
        }
         else{
-          alert("please enter valid email")
+          Alert.alert("please enter mobile and password both")
         }
       
     }
@@ -126,31 +132,35 @@ return (
  
        
         <View style={styles.container}>
-  <Spinner visible={this.state.visible} color='#8e44ad' tintColor='#8e44ad' animation={'fade'} cancelable={false} textStyle={{ color: '#FFF' }} />
+  <Spinner visible={this.state.visible} color='#ff3f34' tintColor='#ff3f34' animation={'fade'} cancelable={false} textStyle={{ color: '#FFF' }} />
    
    <View style={{marginTop:30}}>
     <Image  style={styles.imageWidth} source={require('../images/icon.png')} ></Image>
      <View style={{marginTop:20}}>
-      <View style={styles.rowAlign}>
+            <View style={styles.rowAlign}>
              <Image source={require('../images/mobile.png')} style={styles.icon}/>
-             <TextInput placeholder="Email Id" value={this.state.email} onChangeText={(text)=>this.setState({ email:text})}></TextInput>
+             <TextInput placeholder="Enter Mobile Number" value={this.state.mobile} onChangeText={(text)=>this.setState({ mobile:text})} keyboardType="numeric"></TextInput>
              </View>
               <View style={styles.rowAlign}>
              <Image source={require('../images/password.png')} style={styles.icon}/>
-             <TextInput placeholder="Password" secureTextEntery ={true} value={this.state.email} onChangeText={(text)=>this.setState({ email:text})}></TextInput>
+             <TextInput placeholder="Password" secureTextEntry ={true} value={this.state.password} onChangeText={(text)=>this.setState({ password:text})}></TextInput>
              </View>
    
      <TouchableOpacity style={styles.buttonBackground} onPress={this.login.bind(this)}>
         <Text  style={styles.welcomeLoginText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity style={{flexDirection :'row', marginHorizontal :24}}>
-        <Text style={styles.forgotSignUp}>Forgot Password?</Text>
-        <Text style={styles.forgotSignUp}>New User/SignUp?</Text></TouchableOpacity>
-          <Text style={styles.guestText} onPress={this.signUp.bind(this, 'Home2')}>Resend/Verify OTP? </Text>
-
-           <TouchableOpacity style={styles.buttonBackground2} onPress={this.signUp.bind(this, 'Register')}>
-        <Text  style={styles.welcomeLoginText}>Register</Text>
+        <TouchableOpacity style={{flex:1}} onPress={this.forgot.bind(this)}><Text style={styles.forgotSignUp}>Forgot Password?</Text></TouchableOpacity>
+        <TouchableOpacity onPress={this.signUp.bind(this)} style={{flex:1}}><Text style={styles.forgotSignUp}>New User/SignUp?</Text></TouchableOpacity>
         </TouchableOpacity>
+        <TouchableOpacity style={{flexDirection :'row', marginHorizontal :35}}>
+        <TouchableOpacity style={{flex:1}} onPress={this.verify.bind(this)}><Text style={styles.forgotSignUp}>Resend/Verify OTP?</Text></TouchableOpacity>
+        <TouchableOpacity onPress={this.help.bind(this)} style={{flex:1}}><Text style={styles.forgotSignUp}>Help</Text></TouchableOpacity>
+        </TouchableOpacity>
+         
+
+         <Text style={styles.centerText}>Pramod Kumar Keshri,{"\n"}Barhi,HazariBagh,JharaKhand{"\n"}WhatsApp -9356704158{"\n"}Email:keshripramod@gmail.com{"\n"}
+         Director, Softoasis Technologies Pvt Ltd</Text>
 
         </View>
           </View>

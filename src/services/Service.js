@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, AsyncStorage, NetInfo} from 'react-native';
 import styles from '../styles/styles';
-const apiUrl = "https://theguestposting.com/parsome/"
+const apiUrl = "http://listingapp.ssalumni.com/api/user/"
 export default class Service  extends Component {
   
   constructor(props){
@@ -75,23 +75,74 @@ validateEmail = (email) => {
     return (false)
 };
 
-login = (email, password) => 
+login = (mobile, password) => 
 {
  
-   let formdata = new FormData();
-
-formdata.append("userEmail", email)
-formdata.append("userPassword", password)
- return  fetch(apiUrl + 'api/login',
+ var data = {
+    mobile: mobile,
+    password : password,
+  
+   }
+   console.log('api', apiUrl + 'login')
+ return  fetch(apiUrl + 'login',
     {
       method: "POST",
       headers: {
-        "Accept": "application/json",
-        'Content-Type': 'multipart/form-data',
+       "Accept": "application/json",
+       "Content-Type": "application/json"
       },
-     body: formdata
+     body: JSON.stringify(data)
    }).then((response) => 
-   response.json())
+   response.json()
+   )
+   .catch((error) => {
+     console.error(error);
+   });
+}
+
+forgotPassword = (mobile) => 
+{
+ 
+ var data = {
+    mobile: mobile
+  
+   }
+   console.log('api', apiUrl + 'forget_password')
+ return  fetch(apiUrl + 'forget_password',
+    {
+      method: "POST",
+      headers: {
+       "Accept": "application/json",
+       "Content-Type": "application/json"
+      },
+     body: JSON.stringify(data)
+   }).then((response) => 
+   response.json()
+   )
+   .catch((error) => {
+     console.error(error);
+   });
+}
+
+resendOTP = (mobile) => 
+{
+ 
+ var data = {
+    mobile: mobile
+  
+   }
+   console.log('api', apiUrl + 'resendOTP')
+ return  fetch(apiUrl + 'resendOTP',
+    {
+      method: "POST",
+      headers: {
+       "Accept": "application/json",
+       "Content-Type": "application/json"
+      },
+     body: JSON.stringify(data)
+   }).then((response) => 
+   response.json()
+   )
    .catch((error) => {
      console.error(error);
    });
@@ -99,39 +150,31 @@ formdata.append("userPassword", password)
 
 
 
-register = (id, radio, email,   name, mobile, whatsappNumber, picker1, picker2, city, about) => 
+register = (name, email, mobile, password) => 
 {
- console.log('refid', id, 'radio', radio,  'name', name, 'mobile', mobile, 'whatsappNumber', whatsappNumber, 'edu', picker1, 'emp', picker2, 'city', city, 'about', about)
-if(radio == "Partner")
-{
-  type = 1;
-}
-else
-{
-  type = 2
-}
- let formdata = new FormData();
-formdata.append("userEmail", email)
-formdata.append("userName", name)
-formdata.append("userType", type)
-formdata.append("userCity", city)
-formdata.append("userEmployement", picker2)
-formdata.append("userEducation", picker1)
-formdata.append("userContact",  mobile)
-formdata.append("userWhatsapp", whatsappNumber)
-formdata.append("userAbout", about)
+ console.log('name', name, 'password', password, 'mobile', mobile, 'email', email)
+
+ var data = {
+    name: name,
+    password : password,
+    location: "mohali",
+    mobile:mobile,
+    email : email
+   }
   
- console.log(apiUrl + 'api/register', 'url;lll');
-   return  fetch(apiUrl + 'api/register',
+ console.log(apiUrl + 'register', 'url;lll');
+   return  fetch(apiUrl + 'register',
     {
       method: "POST",
       headers: {
        "Accept": "application/json",
-        'Content-Type': 'multipart/form-data',
+       "Content-Type": "application/json"
       },
-     body: formdata
+     body: JSON.stringify(data)
    }).then((response) => 
-     response.json())
+     console.log('resssss', response.json())
+
+     )
    .catch((error) => {
      console.error(error, 'error');
    });

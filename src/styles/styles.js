@@ -1,12 +1,14 @@
 import {StyleSheet, Platform, Dimensions} from 'react-native';
-export default styles = StyleSheet.create({
+import { s, vs, ms, ScaledSheet } from 'react-native-size-matters';
+export default styles = ScaledSheet.create({
 
   container: {
     flex: 1
   },
  
 imageWidth :{
-  width: Dimensions.get('window').width - 30, height :  Dimensions.get('window').height/2 - 150, alignSelf:'center', marginTop:20
+    width: '180@s', // = scale(100)
+    height: '130@vs', alignSelf:'center', marginTop:'0@ms'
 },
 icon :{
   width:22,
@@ -25,12 +27,21 @@ guestText : {
   fontSize : 16,
   marginTop : 20
 },
+centerText :{
+  textAlign : 'center',
+  fontSize : '14@ms',
+  marginTop : '20@ms'
+},
 forgotSignUp: {
   alignSelf : 'center',
   fontSize : 16,
-  marginTop : 20,
-  width :'50%'
+  marginTop : 20
 },
+splashLoading :{
+  flex:1,
+  justifyContent : 'center'
+},
+
  listCard:{
         width:'100%',
         backgroundColor:'#F0F0F0'
@@ -40,6 +51,10 @@ forgotSignUp: {
     alignSelf:"center",
     paddingTop: 10
 
+  },
+  middleContainer : {
+    marginHorizontal : '24@ms',
+    marginTop:'20@ms'
   },
    listCardWidth : {
         width: '100%',
@@ -53,6 +68,7 @@ forgotSignUp: {
         alignItems:'center',
        // marginTop :2
       },
+  
  radioButton:
     {
         flexDirection: 'row',
@@ -78,6 +94,12 @@ forgotSignUp: {
   height:50,
   marginBottom :20
 },
+ rowAlign2:{
+  flexDirection:'row',
+  width:'70%',
+  alignSelf :"center"
+},
+
     radioIcon:
     {
         borderRadius: 50,
@@ -183,6 +205,7 @@ welcomeTextStyle : {
 },
 welcomeLoginText :{
   color:'white',
+  fontSize : '22@ms'
   
 },
 textWidth : {

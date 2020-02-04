@@ -25,8 +25,8 @@ class Register extends Component {
       picker1:"",
       picker2: "",
       otp : "",
-      selectedItem : "Student",
-      city : "", 
+      checked : false,
+      mobile : "", 
       email : "",
        radioItems:
         [
@@ -49,66 +49,47 @@ class Register extends Component {
     }
     service = new Service();
   }
-    goToPage = (page) => {
-       this.setState({visible : true})
-       
-      if(this.state.picker1 !=="" && this.state.picker2 !== "")
+    signUp = (page) => {
+
+    if(this.state.name && this.state.email && this.state.mobile && this.state.password  )
+    {
+      if(this.state.checked){
+       if(this.state.name.trim() && this.state.email && this.state.mobile && this.state.password.trim() )
+      
+    {
+      if(service.validateEmail(this.state.email))
       {
-       console.log('selectedItem', this.state.selectedItem, "picker1", this.state.picker1, "picker2", this.state.picker2)
-       service.register(this.state.id, this.state.selectedItem, this.state.email,  this.state.name, this.state.mobile, this.state.whatsappNumber, this.state.picker1, this.state.picker2, this.state.city, this.state.about).then((res) => {
-        console.log(res, 'resggggsgs')
-        if(res.message == "User Successfully Register") {
-          this.setState({visible : false})
-          Alert.alert(res.message)
-           this.props.navigation.navigate('Thanks')
+      this.setState({visible : true})
+       service.register(this.state.name, this.state.email,   this.state.mobile, this.state.password).then((res) => {
+        alert(JSON.stringify(res))
+        // if(res.message == "User Successfully Register") {
+        //   this.setState({visible : false})
+        //   Alert.alert(res.message)
+        //    this.props.navigation.navigate('Thanks')
 
-        }
-        else{
-                this.setState({visible : false})
+        // }
+        // else{
+        //         this.setState({visible : false})
 
-          Alert.alert("An Error Occured")
-        }
+        //   Alert.alert("An Error Occured")
+        // }
        })
       }
       else{
-        alert("please enter valid details")
+        Alert.alert("Invalid Email Id")
       }
-      // if(this.state.mobile && this.state.password && this.state.username && this.state.confirmPassword && this.state.otp)
-      // {
-      //    if ( this.state.password != this.state.confirmPassword) {
-      //     Alert.alert("password and confirmpassword do not match")
-      //   } 
-      //   else
-      //   {
-      //    this.props.navigation.navigate(page)
-      //   }
-         
-      // }
-
-      // else
-      // {
-      //   if(!this.state.mobile && !this.state.password && !this.state.username && !this.state.confirmPassword && !this.state.otp) {
-      //        Alert.alert("please enter all details")
-      //   }
-      //  else  if(!this.state.mobile )
-      //   {
-      //       Alert.alert("please enter mobile")
-      //   }
-      //    else if(!this.state.password )
-      //   {
-      //       Alert.alert("please enter password")
-      //   }
-      //   else  if(!this.state.username )
-      //   {
-      //       Alert.alert("please enter email")
-      //   }
-      //    else if(!this.state.confirmPassword )
-      //   {
-      //       Alert.alert("please enter confirm password")
-      //   }
-       
-      // }
-        
+    }
+    else {
+      Alert.alert("Fields Cannot Be Emptyy")
+    }
+  }else {
+    Alert.alert("Please accept the conditions")
+  }
+   
+    }
+    else {
+    Alert.alert("Please enter all details")
+    }
     }
 
 sendOTP = () => {
@@ -123,6 +104,15 @@ verifyOTP = () => {
   {
     Alert.alert("Please enter valid OTP")
   }
+}
+changeImage = () => {
+if(this.state.checked ){
+  this.setState({checked : false})
+}
+else {
+    this.setState({checked : true})
+
+}
 }
   setMobile = (text) => 
   {
@@ -146,7 +136,8 @@ verifyOTP = () => {
   }
 
   goBack = () => {
-      this.props.navigation.goBack()
+     this.props.navigation.goBack()
+
     }
 render () { 
 return (<View style={styles.container}>
@@ -160,20 +151,38 @@ return (<View style={styles.container}>
                    
                     </TouchableOpacity>
                 </View>
+      <View style={{marginTop:20}}>
       <Image  style={styles.imageWidth} source={require('../images/icon.png')} ></Image>
+      </View>
       <ScrollView>
 
     <View style={{marginTop:10}}>
     
     
-     
-    <TextInput style={styles.input} placeholder="Enter Name" onChangeText={(text)=>this.setState({ name:text})} placeholderTextColor = "#95a5a6"></TextInput>
-     <TextInput style={styles.input} placeholder="Enter Email" onChangeText={(text)=>this.setState({ email:text})} placeholderTextColor = "#95a5a6"></TextInput>
-     <TextInput style={styles.input} placeholder="Enter Mobile Number " onChangeText={(text)=>this.setMobile(text) } placeholderTextColor = "#95a5a6"  keyboardType='numeric' maxLength={10}></TextInput>
-      <TextInput style={styles.input} placeholder="Password" onChangeText={(text)=>this.setState({ whatsappNumber:text})} placeholderTextColor = "#95a5a6"  keyboardType='numeric' maxLength={10}></TextInput>
-      <Text style={{textAlign : "center"}}>Are You From Keshri Samaj?</Text>
+      <View style={styles.rowAlign}>
+             <Image source={require('../images/name.png')} style={styles.icon}/>
+             <TextInput placeholder="Enter Name" value={this.state.name} onChangeText={(text)=>this.setState({ name:text})}></TextInput>
+             </View>
+             <View style={styles.rowAlign}>
+             <Image source={require('../images/email1.png')} style={styles.icon}/>
+             <TextInput placeholder="Enter Email" value={this.state.email} onChangeText={(text)=>this.setState({ email:text})}></TextInput>
+             </View>
+             <View style={styles.rowAlign}>
+             <Image source={require('../images/mobile.png')} style={styles.icon}/>
+             <TextInput placeholder="Enter Mobile Number" keyboardType="numeric" value={this.state.mobile} onChangeText={(text)=>this.setState({ mobile:text})}></TextInput>
+             </View>
+              <View style={styles.rowAlign}>
+             <Image source={require('../images/password.png')} style={styles.icon}/>
+             <TextInput placeholder="Password" secureTextEntery ={true} value={this.state.password} onChangeText={(text)=>this.setState({ password:text})}></TextInput>
+             </View>
+        <View style={styles.rowAlign2}>
+             <TouchableOpacity onPress={() => this.changeImage()}>{!this.state.checked ? <Image source={require('../images/check-box.png')} style={styles.icon}/> : <Image source={require('../images/check-box-checked.png')} style={styles.icon}/>}</TouchableOpacity>
+             <Text style={{textAlign : "center",marginTop:15}}>Are You From Keshri Samaj?</Text>
+             </View>
+   
+
            <Text  style={{textAlign:'center'}}>By Registering myself,{"\n"} I agree to terms and conditions</Text>
-    <TouchableOpacity style={styles.buttonBackground} onPress={this.goToPage.bind(this, 'Form')}>
+    <TouchableOpacity style={styles.buttonBackground} onPress={this.signUp.bind(this)}>
         <Text  style={styles.welcomeLoginText}>Register</Text>
 
         </TouchableOpacity>

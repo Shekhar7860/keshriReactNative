@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react'
-import { createAppContainer} from 'react-navigation';
+import { createAppContainer, createSwitchNavigator} from 'react-navigation';
 import { createStackNavigator} from 'react-navigation-stack';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -49,54 +49,47 @@ const store = createStore(authReducer, applyMiddleware(thunk));
 
  import Icon from 'react-native-vector-icons/MaterialIcons';
  import Icon1 from 'react-native-vector-icons/Fontisto';
+
 const Tabs =  createBottomTabNavigator({
-     Home2: { screen: Home2,navigationOptions: {
-        tabBarLabel:"Home",
+   
+       Calls : { screen: About,navigationOptions: {
+        tabBarLabel:"About",
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="home" size={20} color="white" />
+          <Icon name="label" size={20} />
         )
       } },
-       Calls : { screen: Tasks,navigationOptions: {
-        tabBarLabel:"Calls",
+ 
+        Help: { screen: Terms,navigationOptions: {
+         tabBarLabel: 'Help',
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="call" size={20} color="white" />
-        )
-      } },
-  Register: { screen: Notifications,navigationOptions: {
-         tabBarLabel: 'Create Leads',
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="library-books" size={20} color="white" />
+          <Icon name="help-outline" size={20} />
         )
       }},
-  Home : { screen: Profile,navigationOptions: {
-        tabBarLabel:"My Leads",
+   
+  Privacy : { screen: Privacy,navigationOptions: {
+        tabBarLabel:"Privacy",
         tabBarIcon: ({ tintColor }) => (
-          <Icon1 name="persons" size={20} color="white" />
+          <Icon1 name="info" size={20} />
         )
       }}, 
-       Settings : { screen: Settings,navigationOptions: {
-        tabBarLabel:"Help",
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="help" size={20} color="white" />
-        )
-      }}, 
+       
 },{
         tabBarOptions:{
-      activeTintColor: 'white',
-       inactiveTintColor: 'white',
+      activeTintColor: 'black',
+       inactiveTintColor: 'brown',
        labelStyle: {
     margin: 0
   },
        tabStyle: {
     justifyContent: 'center',
     height : 50,
-    marginTop : 8
+    marginTop : -1
   },
       //other properties
       pressColor: 'white',//for click (ripple) effect color
       style: {
-        backgroundColor: '#8e44ad',
-              height: 70
+        
+              height: 50
 
 
       //color you want to change
@@ -125,16 +118,24 @@ const HomeScreenRouter = createDrawerNavigator(
 
 
 
-
 const Stack = createStackNavigator({
   Splash: {
     screen: Splash,
+  },
+   Tabs: {
+    screen: Tabs,
   },
    Confirm : { screen: HomeScreenRouter
   },
   Welcome: {
     screen: Welcome,
   }, 
+   Verify : {
+    screen: Partners,
+  },
+   Forgot: {
+    screen: Tasks,
+  },
   Form : {
     screen: Form,
   },
@@ -199,12 +200,40 @@ const Stack = createStackNavigator({
  { headerMode: 'none' });
 
 
+const Stack2 = createSwitchNavigator({
+ 
+    Login: {
+    screen: Login,
+  },
+    Splash: {
+    screen: Stack,
+  }
+
+
+  
+},
+ { headerMode: 'none', initialRouteName:'Splash' });
+
+
+ const AppContainer = () => {
+    return createAppContainer(createSwitchNavigator(
+        {
+            signOut: Stack,
+            tabBar: Tabs,
+            Register : Register
+        },
+        {
+            initialRouteName: 'signOut',
+        }
+    ));
+}
+
 export default class App extends Component {
   componentDidMount = () => {
     console.disableYellowBox = true;
   }
   render() {
-    const AppRouter = createAppContainer(Stack);
+    const AppRouter = createAppContainer(Stack2);
 
     return (
       <Provider store={store}>
