@@ -84,11 +84,18 @@ verify = () => {
          this.setState({visible : true})
           service.login(this.state.mobile, this.state.password).then((res) => {
             console.log(res, 'resssssss')
-        //     if(res.success == true) {
-           this.setState({visible : false})
+              this.setState({visible : false})
+             if(res.status == true) {
+             // alert("working")
+                  service.saveUserData('user', res)
+                  this.props.actions.logindata(res)
+        this.props.navigation.navigate('Home')
+             }
            if(res.status == false){
+
              Alert.alert(res.message)
            }
+
         
         //   // this.props.actions.logindata(res)
         //   // this.props.navigation.navigate('Home2')
@@ -96,7 +103,7 @@ verify = () => {
         // }
         // else{
         //     var data = {name : "shekhar", userId : 21}
-        //   service.saveUserData('user', data)
+       
         //    Alert.alert(res.message)
         //     this.setState({visible : false})
         //    this.props.actions.logindata(res)

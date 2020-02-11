@@ -41,6 +41,8 @@ import  Process from './src/components/Process'
 import  Terms from './src/components/Terms'
 import  Privacy from './src/components/Privacy'
 import  About from './src/components/About'
+import Service from "./src/services/Service";
+
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import authReducer from './src/reducers/authReducer';
@@ -125,7 +127,7 @@ const Stack = createStackNavigator({
    Tabs: {
     screen: Tabs,
   },
-   Confirm : { screen: HomeScreenRouter
+   Home : { screen: Home
   },
   Welcome: {
     screen: Welcome,
@@ -190,50 +192,58 @@ const Stack = createStackNavigator({
   About: {
     screen: About,
   },
-  Home: {
-    screen: Home,
-  },
   Home2: {
     screen: HomeScreenRouter,
   }
 },
  { headerMode: 'none' });
+const HomeStack = createStackNavigator({
+  Home: {
+    screen: Home,
+  },
+   Tabs: {
+    screen: Tabs,
+  },
+   Matrimonials : { screen: Leads
+  },
+ 
+},
+ { headerMode: 'none' });
 
 
 const Stack2 = createSwitchNavigator({
- 
     Login: {
     screen: Login,
   },
     Splash: {
-    screen: Stack,
+    screen: Stack
   }
-
-
-  
 },
  { headerMode: 'none', initialRouteName:'Splash' });
 
 
- const AppContainer = () => {
-    return createAppContainer(createSwitchNavigator(
-        {
-            signOut: Stack,
-            tabBar: Tabs,
-            Register : Register
-        },
-        {
-            initialRouteName: 'signOut',
-        }
-    ));
-}
 
 export default class App extends Component {
+   constructor(props){
+    super(props);
+    this.state = { 
+      userId :""
+    }
+    service = new Service();
+  }
   componentDidMount = () => {
+    service.getUserData('user').then((res) => {
+      console.log('localData', res)
+      var data = JSON.parse(res);
+      console.log('parsed Data', data)
+     this.setState({userId:data.id})
+    //  Alert.alert("loggin successfully")
+          // this.props.navigation.navigate('Profile')
+      })
     console.disableYellowBox = true;
   }
   render() {
-    const AppRouter = createAppContainer(Stack2);
+    const AppRouter = createAppContainer(this.state.userId !="" ? HomeStack : Stack2);
 
     return (
       <Provider store={store}>
