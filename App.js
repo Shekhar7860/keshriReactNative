@@ -206,6 +206,9 @@ const HomeStack = createStackNavigator({
   },
    Matrimonials : { screen: Leads
   },
+  Login :{
+screen : Login
+  },
  
 },
  { headerMode: 'none' });

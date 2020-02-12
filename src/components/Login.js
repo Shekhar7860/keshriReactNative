@@ -97,18 +97,7 @@ verify = () => {
            }
 
         
-        //   // this.props.actions.logindata(res)
-        //   // this.props.navigation.navigate('Home2')
-
-        // }
-        // else{
-        //     var data = {name : "shekhar", userId : 21}
-       
-        //    Alert.alert(res.message)
-        //     this.setState({visible : false})
-        //    this.props.actions.logindata(res)
-        //    this.props.navigation.navigate('Home2')
-        // }
+      
                       })
        }
         else{
