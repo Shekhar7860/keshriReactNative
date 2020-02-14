@@ -15,18 +15,31 @@ import { s, vs, moderateScale, ScaledSheet } from 'react-native-size-matters';
       listView : true,
       mapView : false, 
       longitude : "", 
-      latitude : "",
+      name : "",
       places : [1, 2],
       modalVisible: false
       
     }
+   
     service = new Service()
   }
 
     componentDidMount = () => {
       console.log('userProps', this.props)
-      alert(JSON.stringify(this.props))
+         service.getUserData('user').then((res) => {
+      console.log('localData', res)
+      var data = JSON.parse(res);
+         this.homeData(data)
+
+      })
+      
      
+    }
+
+    homeData = (data) => {
+       setTimeout(() =>{
+      this.props.actions.logindata(data)
+        }, 1000)
     }
 
 logOut=() => {
@@ -75,32 +88,52 @@ exit = () => {
      toggleModal(visible) {
       this.setState({ modalVisible: visible });
    }
+
+   getUserName = () => {
+    console.log('propsssss', this.props)
+ //    if(this.props.logindata){
+ //   this.setState({name : this.props.logindata.name})
+ // }
+   }
    paying=()=>{
     Alert.alert("Coming Soon")
    }
     
 render () {
+  console.log('prssss', (this.props.users))
   const userData=this.props.logindata
     return (<View
        style={{flex:1}}>
+       
        <ScrollView>
        <TouchableOpacity onPress={this.paying.bind(this)}>
         <Image source={{uri:"https://www.payumoney.com//media/images/payby_payumoney/buttons/211.png"}} style={{height:moderateScale(80), width:moderateScale(180), marginTop:moderateScale(20), alignSelf:'center'}}/>
          </TouchableOpacity>
-         <TouchableOpacity onPress={this.paying.bind(this)}>
+
+          <TouchableOpacity onPress={this.paying.bind(this)}>
+       
         <Image source={require('../images/onelinelogo.png')} style={{width:moderateScale(300), marginTop:moderateScale(10), height:moderateScale(60), alignSelf:"center"}}/>
          </TouchableOpacity>
+               <Text style={{textAlign:'center', marginTop:moderateScale(10), fontSize:moderateScale(20), fontWeight:"bold", color :"#ff3f34"}}>Hello {this.props.user ? 'this.props.user.auth.logindata.name' : null}</Text>
+
          
        <TouchableOpacity style={{width:"100%", flexDirection : 'row', marginTop:30}}>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity onPress={() => this.props.navigation.navigate("Joining")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}><Text style={{fontSize : 12, textAlign:"center"}}> Search Matrimonials{"\n"}(वैवाहिक खोज)</Text></TouchableOpacity>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate("Joining")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}>
+       <Image style={{width:moderateScale(94), height:moderateScale(80)}} source={require('../images/mrg.jpg')}/></TouchableOpacity>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity onPress={() => this.props.navigation.navigate("Benefits")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}><Text style={{fontSize : 12, textAlign:"center"}}> My Account{"\n"} (मेरा खाता)</Text></TouchableOpacity>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate("Benefits")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}></TouchableOpacity>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity onPress={() => this.props.navigation.navigate("Sponsoring")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}><Text style={{fontSize : 12, textAlign:"center"}}> Requests {"\n"} (अनुरोधों)</Text></TouchableOpacity>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate("Sponsoring")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}></TouchableOpacity>
 
 
        </TouchableOpacity>
+       <View style={{flexDirection:'row', alignItems:"center", justifyContent:'center', width:'100%'}}>
+       <View style={{width:"33%"}}><Text style={{ fontSize : 12, textAlign:'center'}}>Search Matrimonials{"\n"}(वैवाहिक खोज)</Text></View>
+        <View style={{width:"33%"}}><Text style={{textAlign:'center', fontSize : 12}}> My Account{"\n"} (मेरा खाता)</Text></View>
+       <View style={{width:"33%"}}><Text style={{ fontSize : 12, textAlign:'center'}}> Requests {"\n"} (अनुरोधों)</Text></View>
+       </View>
+
 
        <TouchableOpacity style={{width:"100%", flexDirection : 'row', marginTop:20}}>
        <View style={{width:"5%"}}></View>
@@ -143,7 +176,7 @@ render () {
        </TouchableOpacity>
 
        <Text style={{textAlign:"center", marginTop:20}}>If you have any problem related to modicare, call/whatsapp at -+916394043883 (यदि आपको मोडिकेयर, कॉल / व्हाट्सएप से संबंधित कोई समस्या है - + 916394043883 पर)</Text>
-  }
+  
  </ScrollView>
 
         </View>)

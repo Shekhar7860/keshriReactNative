@@ -48,13 +48,7 @@ verify = () => {
     goToPage = (page) => {
       if(this.state.mobile && this.state.password)
       {
-        // if (!service.validateEmail(this.state.email)) {
-        //   Alert.alert("please enter valid email")
-        // } 
-        // else
-        // {
-         this.props.navigation.navigate(page)
-      //  }
+    this.props.navigation.navigate(page)
       }
       else
       {

@@ -15,7 +15,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     
     case  LOGIN_DATA:
-    alert('i m wokring')
+    console.log('palos', action.payload)
     return {
       ...state,
       logindata: action.payload

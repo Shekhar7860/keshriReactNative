@@ -11,7 +11,7 @@ import { createAppContainer, createSwitchNavigator} from 'react-navigation';
 import { createStackNavigator} from 'react-navigation-stack';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { StyleSheet} from 'react-native'
+import { StyleSheet, Alert} from 'react-native'
 import Welcome from './src/components/Welcome'
 import 'react-native-gesture-handler'
 import Splash from './src/components/Splash'
@@ -42,6 +42,7 @@ import  Terms from './src/components/Terms'
 import  Privacy from './src/components/Privacy'
 import  About from './src/components/About'
 import Service from "./src/services/Service";
+import NetInfo from "@react-native-community/netinfo";
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -127,6 +128,9 @@ const Stack = createStackNavigator({
    Tabs: {
     screen: Tabs,
   },
+   Login: {
+    screen: Login,
+  },
    Home : { screen: Home
   },
   Welcome: {
@@ -171,9 +175,7 @@ const Stack = createStackNavigator({
    Details: {
     screen: Details,
   },
-  Login: {
-    screen: Login,
-  },
+ 
   Register: {
     screen: Register,
   },
@@ -235,6 +237,7 @@ export default class App extends Component {
     service = new Service();
   }
   componentDidMount = () => {
+    this.CheckConnectivity()
     service.getUserData('user').then((res) => {
       console.log('localData', res)
       var data = JSON.parse(res);
@@ -245,6 +248,31 @@ export default class App extends Component {
       })
     console.disableYellowBox = true;
   }
+  CheckConnectivity = () => {
+    // For Android devices
+    if (Platform.OS === "android") {
+     
+    } else {
+      // For iOS devices
+      NetInfo.isConnected.addEventListener(
+        "connectionChange",
+        this.handleFirstConnectivityChange
+      );
+    }
+  };
+
+  handleFirstConnectivityChange = isConnected => {
+    NetInfo.isConnected.removeEventListener(
+      "connectionChange",
+      this.handleFirstConnectivityChange
+    );
+
+    if (isConnected === false) {
+      Alert.alert("You are offline!");
+    } else {
+      Alert.alert("You are online!");
+    }
+  };
   render() {
     const AppRouter = createAppContainer(this.state.userId !="" ? HomeStack : Stack2);
 
