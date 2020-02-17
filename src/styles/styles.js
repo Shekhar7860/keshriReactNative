@@ -208,6 +208,11 @@ welcomeLoginText :{
   fontSize : '22@ms'
   
 },
+welcomeLoginTextRequests :{
+  color:'white',
+  fontSize : '18@ms'
+  
+},
 textWidth : {
   width: '85%'
 },
@@ -327,7 +332,7 @@ toolbar:{
         textAlign:'left',
         fontWeight:'bold',
         flex:1,
-        fontSize:20                //Step 3
+        fontSize:16              //Step 3
     },
     tabsContainerStyle: {
     //custom styles
@@ -379,6 +384,16 @@ buttonBackground2:{
   width:"90%",
   borderRadius:25,
   height:40,
+  alignItems:'center',
+  justifyContent:'center'
+},
+buttonBackground3:{
+ marginTop:30,
+ alignSelf:'center',
+  backgroundColor:'#ff3f34',
+  width:"90%",
+  borderRadius:40,
+  height:80,
   alignItems:'center',
   justifyContent:'center'
 },

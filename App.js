@@ -206,8 +206,15 @@ const HomeStack = createStackNavigator({
    Tabs: {
     screen: Tabs,
   },
-   Matrimonials : { screen: Leads
+  Search :{
+    screen : Process
   },
+    Requests :{
+    screen : Volume
+  },
+   Matrimonials : { screen: Leads
+  }
+  ,
   Login :{
 screen : Login
   },

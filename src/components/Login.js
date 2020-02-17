@@ -81,8 +81,8 @@ verify = () => {
               this.setState({visible : false})
              if(res.status == true) {
              // alert("working")
-                  service.saveUserData('user', res)
-                  this.props.actions.logindata(res)
+         service.saveUserData('user', res)
+        this.props.actions.logindata(res)
         this.props.navigation.navigate('Home')
              }
            if(res.status == false){

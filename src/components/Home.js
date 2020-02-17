@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as authaction from '../actions/authaction'
 import { s, vs, moderateScale, ScaledSheet } from 'react-native-size-matters';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
  class Home extends Component {
 
@@ -119,12 +120,12 @@ render () {
          
        <TouchableOpacity style={{width:"100%", flexDirection : 'row', marginTop:30}}>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity onPress={() => this.props.navigation.navigate("Joining")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate("Search")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}>
        <Image style={{width:moderateScale(94), height:moderateScale(80)}} source={require('../images/mrg.jpg')}/></TouchableOpacity>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity onPress={() => this.props.navigation.navigate("Benefits")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}></TouchableOpacity>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate("Account")} style={{width:"27%", height : 80,backgroundColor :"#e74c3c",  borderWidth:1, justifyContent :"center", alignItems:"center"}}><Icon name="user" size={30} color="#ffffff"/></TouchableOpacity>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity onPress={() => this.props.navigation.navigate("Sponsoring")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}></TouchableOpacity>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate("Requests")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center", alignItems:'center', backgroundColor:"#f39c12"}}><Icon name="anchor" size={30} color="#ffffff"/></TouchableOpacity>
 
 
        </TouchableOpacity>
@@ -137,45 +138,70 @@ render () {
 
        <TouchableOpacity style={{width:"100%", flexDirection : 'row', marginTop:20}}>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity onPress={() => this.props.navigation.navigate("Seminar")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}><Text style={{fontSize : 12, textAlign:"center"}}>Create Matrimonial Profile {"\n"}(वैवाहिक प्रोफ़ाइल बनाएं)</Text></TouchableOpacity>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate("CreateMatrimonial")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}>
+       <Image style={{width:moderateScale(94), height:moderateScale(80)}} source={require('../images/mrg.jpg')}/></TouchableOpacity>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity onPress={() => this.props.navigation.navigate("ProductDemos")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}><Text style={{fontSize : 12, textAlign:"center"}}>My Matrimonial Profiles{"\n"} (मेरी वैवाहिक प्रोफाइल)</Text></TouchableOpacity>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate("MyMatrimonial")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}><Image style={{width:moderateScale(94), height:moderateScale(80)}} source={require('../images/mrg.jpg')}/></TouchableOpacity>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}><Text style={{fontSize : 12, textAlign:"center"}}>My Matrimonial Messages {"\n"} (मेरे मैट्रिमोनियल संदेश)</Text></TouchableOpacity>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate("MatrimonialMessages")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center", alignItems:"center", backgroundColor:"#2ecc71"}}><Icon name="envelope" size={30} color="#ffffff"/></TouchableOpacity>
 
        </TouchableOpacity>
+       <View style={{flexDirection:'row', alignItems:"center", justifyContent:'center', width:'100%'}}>
+       <View style={{width:"33%"}}><Text style={{ fontSize : 12, textAlign:'center'}}>Create Matrimonial Profile {"\n"}(वैवाहिक प्रोफ़ाइल बनाएं)</Text></View>
+        <View style={{width:"33%"}}><Text style={{textAlign:'center', fontSize : 12}}>My Matrimonial Profiles{"\n"} (मेरी वैवाहिक प्रोफाइल)</Text></View>
+       <View style={{width:"33%"}}><Text style={{ fontSize : 12, textAlign:'center'}}>My Matrimonial Messages {"\n"} (मेरे मैट्रिमोनियल संदेश)</Text></View>
+       </View>
+  
         <TouchableOpacity style={{width:"100%", flexDirection : 'row', marginTop:20}}>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity onPress={() => this.props.navigation.navigate("Offers")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}><Text style={{fontSize : 12, textAlign:"center"}}> Careers{"\n"}(कैरियर्स )</Text></TouchableOpacity>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate("Careers")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center", alignItems:"center", backgroundColor:"#3498db"}}><Icon name="badge" size={30} color="#ffffff"/></TouchableOpacity>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}><Text style={{fontSize : 12, textAlign:"center"}}>Members{"\n"}(सदस्य)</Text></TouchableOpacity>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate("Members")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center", alignItems:"center", backgroundColor:"#8e44ad"}}><Icon name="people" size={30} color="#ffffff"/></TouchableOpacity>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity onPress={() => this.props.navigation.navigate("Screen1")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}><Text style={{fontSize : 12, textAlign:"center"}}>Change Password{"\n"}(पासवर्ड बदलें)</Text></TouchableOpacity>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate("Change")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center", backgroundColor:"#778ca3", alignItems:"center"}}><Icon name="cursor" size={30} color="#ffffff"/></TouchableOpacity>
 
 
        </TouchableOpacity>
+        <View style={{flexDirection:'row', alignItems:"center", justifyContent:'center', width:'100%'}}>
+       <View style={{width:"33%"}}><Text style={{fontSize : 12, textAlign:"center"}}> Careers{"\n"}(कैरियर्स )</Text></View>
+        <View style={{width:"33%"}}><Text style={{textAlign:'center', fontSize : 12}}>Members{"\n"}(सदस्य)</Text></View>
+       <View style={{width:"33%"}}><Text style={{ fontSize : 12, textAlign:'center'}}>Change Password{"\n"}(पासवर्ड बदलें)</Text></View>
+       </View>
         <TouchableOpacity style={{width:"100%", flexDirection : 'row', marginTop:20}}>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity onPress={() => this.props.navigation.navigate("Complaints")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}><Text style={{fontSize : 12, textAlign:"center"}}>My Messages {"\n"} (मेरे संदेश )</Text></TouchableOpacity>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate("Messages")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center", alignItems:"center", backgroundColor:"#1abc9c"}}><Icon name="envelope" size={30} color="#ffffff"/></TouchableOpacity>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}><Text style={{fontSize : 12, textAlign:"center"}}> Membership Fee{"\n"}(मेम्बरशिप फी)</Text></TouchableOpacity>
+       <TouchableOpacity  onPress={() => this.props.navigation.navigate("Pay")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center", alignItems:"center", backgroundColor:"#fed330"}}><Icon name="paypal" size={30} color="#ffffff"/></TouchableOpacity>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}><Text style={{fontSize : 12, textAlign:"center"}}> Career Details{"\n"}(कैरियर विवरण)</Text></TouchableOpacity>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate("CareerDetails")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center", alignItems:"center", backgroundColor:"#eb3b5a"}}><Icon name="exclamation" size={30} color="#ffffff"/></TouchableOpacity>
 
 
        </TouchableOpacity>
+       <View style={{flexDirection:'row', alignItems:"center", justifyContent:'center', width:'100%'}}>
+       <View style={{width:"33%"}}><Text style={{fontSize : 12, textAlign:"center"}}> My Messages {"\n"} (मेरे संदेश )</Text></View>
+        <View style={{width:"33%"}}><Text style={{textAlign:'center', fontSize : 12}}>Membership Fee{"\n"}(मेम्बरशिप फी)</Text></View>
+       <View style={{width:"33%"}}><Text style={{ fontSize : 12, textAlign:'center'}}>Career Details{"\n"}(कैरियर विवरण)</Text></View>
+       </View>
+
+
        <TouchableOpacity style={{width:"100%", flexDirection : 'row', marginTop:20}}>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity onPress={() => this.props.navigation.navigate("Complaints")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}}><Text style={{fontSize : 12, textAlign:"center"}}>Add/Invite Users{"\n"}(उपयोगकर्ता जोड़ें / आमंत्रित करें)</Text></TouchableOpacity>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate("Invite")} style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center", alignItems:"center", backgroundColor:"#d1d8e0"}}><Icon name="user-follow" size={30} color="#ffffff"/></TouchableOpacity>
        <View style={{width:"5%"}}></View>
-       <TouchableOpacity style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center"}} onPress={this.logOut.bind(this)}><Text style={{fontSize : 12, textAlign:"center"}}> Logout {"\n"} (लोग आउट)</Text></TouchableOpacity>
+       <TouchableOpacity style={{width:"27%", height : 80, borderWidth:1, justifyContent :"center", alignItems:"center", backgroundColor:"#EA2027"}} onPress={this.logOut.bind(this)}><Icon name="logout" size={30} color="#ffffff"/></TouchableOpacity>
        <View style={{width:"5%"}}></View>
        <TouchableOpacity style={{width:"27%", justifyContent :"center"}}></TouchableOpacity>
 
 
        </TouchableOpacity>
+        <View style={{flexDirection:'row', alignItems:"center", justifyContent:'center', width:'100%'}}>
+       <View style={{width:"33%"}}><Text style={{fontSize : 12, textAlign:"center"}}>Add/Invite Users{"\n"}(उपयोगकर्ता जोड़ें / आमंत्रित करें)</Text></View>
+        <View style={{width:"33%"}}><Text style={{textAlign:'center', fontSize : 12, marginTop:moderateScale(-10)}}>LogOut {"\n"} (लोग आउट)</Text></View>
+       <View style={{width:"33%"}}><Text style={{ fontSize : 12, textAlign:'center'}}></Text></View>
+       </View>
 
-       <Text style={{textAlign:"center", marginTop:20}}>If you have any problem related to modicare, call/whatsapp at -+916394043883 (यदि आपको मोडिकेयर, कॉल / व्हाट्सएप से संबंधित कोई समस्या है - + 916394043883 पर)</Text>
+
+       <Text style={{textAlign:"center", marginTop:moderateScale(30), fontSize:moderateScale(16)}}>Developed & Maintained By{"\n"}<Text style={{color:"#EE5A24", fontWeight:"bold"}}>Pramod Kumar Keshri</Text>{"\n"}Barhi. HazariBagh, JharKhand{"\n"}Whatsapp:9356704158{"\n"}Email:keshripramod@gmail.com</Text>
   
  </ScrollView>
 
