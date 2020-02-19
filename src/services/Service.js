@@ -124,6 +124,29 @@ forgotPassword = (mobile) =>
    });
 }
 
+searchMatrimonial = (height1, height2, age1, age2, qualification, weddingperson) => 
+{
+ 
+ var data = 
+ {"height_from": height1,"height_to": height2,"age_from": age1,"age_to": age2,"education": qualification,"gender": weddingperson}
+   console.log('api', apiUrl + 'matrimonials_search')
+ return  fetch(apiUrl + 'matrimonials_search',
+    {
+      method: "POST",
+      headers: {
+       "Accept": "application/json",
+       "Content-Type": "application/json"
+      },
+     body: JSON.stringify(data)
+   }).then((response) => 
+   response.json()
+   )
+   .catch((error) => {
+     console.error(error);
+   });
+}
+
+
 resendOTP = (mobile) => 
 {
  

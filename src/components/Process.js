@@ -9,16 +9,12 @@ export default class Process extends Component {
   constructor(props){
     super(props);
     this.state = { 
-      name:'',
-      cls:'',
-      city:'',
-      age:'',
-      mobile : '',
-      confirmPasswordError:'',
-      passwordError:'',
-      emailFormatError:'',
-      mobileError:'',
-      emailFormatError:'',
+      ageFrom : "21 Yrs",
+      ageTo : "24 Yrs",
+      heightFrom : "4F",
+      heightTo : "6F",
+      education : "B.C.A",
+      gender : "Bride",
       loading: false,
       cardheight:300
     }
@@ -31,7 +27,8 @@ findState = () => {
     this.props.navigation.openDrawer()
   }
   search = () => {
-
+    //alert('kkkk')
+ this.props.navigation.navigate('Referals')
   }
 
    submit = () => {
@@ -53,55 +50,145 @@ findState = () => {
   render() {
       const  NewImage =   <Image source={require('../images/78.png')} style={styles.profilePic}/>
       let data = [{
-  value: '1995',
+  value: '18 Yrs',
 }, {
-  value: '1996',
+  value: '19 Yrs',
 }, {
-  value: '1997',
+  value: '20 Yrs',
 }, {
-  value: '1998',
+  value: '21 Yrs',
 }, {
-  value: '1999',
+  value: '22 Yrs',
 }, {
-  value: '2000',
+  value: '23 Yrs',
 },  {
-  value: '2001',
+  value: '24 Yrs',
 },  {
-  value: '2002',
+  value: '25 Yrs',
 },  {
-  value: '2003',
+  value: '26 Yrs',
 },  {
-  value: '2004',
+  value: '27 Yrs',
 },  {
-  value: '2005',
+  value: '28 Yrs',
 },  {
-  value: '2006',
+  value: '29 Yrs',
 },  {
-  value: '2007',
+  value: '30 Yrs',
+}];
+
+let educationData = [{
+  value: '10TH',
+}, {
+  value: '12TH',
+}, {
+  value: 'B.B.A',
+}, {
+  value: 'B.C.A',
+}, {
+  value: 'B.COM',
+}, {
+  value: 'B.D.S',
 },  {
-  value: '2008',
+  value: 'B.DES/B.D',
 },  {
-  value: '2009',
+  value: 'B.E/B.TECH',
 },  {
-  value: '2010',
+  value: 'B.ED',
 },  {
-  value: '2011',
+  value: 'B.F.SC/B.SC',
 },  {
-  value: '2012',
+  value: 'B.H.M.S',
 },  {
-  value: '2013',
+  value: 'B.LIB/B.LIB.SC',
 },  {
-  value: '2014',
+  value: 'B.M.C/B.M.M',
+},{
+  value: 'B.PED',
+},{
+  value: 'B.P.T',
+},{
+  value: 'B.PHARM/B.PHARMA',
+}];
+
+let height = [{
+  value: '4F',
+}, {
+  value: '4F 1"',
+}, {
+  value: '4F 2"',
+}, {
+  value: '4F 3"',
+}, {
+  value: '4F 4"',
+}, {
+  value: '4F 5"',
 },  {
-  value: '2015',
+  value: '4F 6"',
 },  {
-  value: '2016',
+  value: '4F 7"',
 },  {
-  value: '2017',
+  value: '4F 8"',
 },  {
-  value: '2018',
+  value: '4F 9"',
 },  {
-  value: '2019',
+  value: '4F 10"',
+},  {
+  value: '4F 11"',
+},  {
+  value: '4F 12"',
+},{
+  value: '5F',
+},{
+  value: '5F 1"',
+},{
+  value: '5F 2"',
+},  {
+  value: '5F 3"',
+},{
+  value: '5F 4"',
+}, {
+  value: '5F 5"',
+},  {
+  value: '5F 6"',
+},  {
+  value: '5F 7"',
+},  {
+  value: '5F 8"',
+},  {
+  value: '5F 9"',
+},  {
+  value: '5F 10"',
+},  {
+  value: '5F 11"',
+},  {
+  value: '5F 12"',
+},{
+  value: '6F',
+},{
+  value: '6F 1"',
+},{
+  value: '6F 2"',
+},  {
+  value: '6F 3"',
+},{
+  value: '6F 4"',
+}, {
+  value: '6F 5"',
+},  {
+  value: '6F 6"',
+},  {
+  value: '6F 7"',
+},  {
+  value: '6F 8"',
+},  {
+  value: '6F 9"',
+},  {
+  value: '6F 10"',
+},  {
+  value: '6F 11"',
+},  {
+  value: '6F 12"',
 }];
 let data2 = [{
   value: 'Bride',
@@ -124,19 +211,21 @@ let data2 = [{
                 <View style={{width:"25%"}}><Text style={{marginTop:moderateScale(35), color :"#ff3f34"}}>Age From</Text></View>
                 <View style={{width:"25%"}}><Dropdown
                 containerStyle={{ width:"100%"}}
-        label='Education'
+        label='From'
         data={data}
+        value={'21 Yrs'}
         onChangeText={(val) =>  
-          this.setState({picker1: val})
+          this.setState({ageFrom: val})
          } 
       /></View>
                 <View style={{width:"25%"}}><Text style={{marginTop:moderateScale(35), marginLeft:moderateScale(45), color :"#ff3f34"}}>To</Text></View>
                 <View style={{width:"25%"}}><Dropdown
                 containerStyle={{ width:'100%'}}
-        label='Education'
+        label='To'
         data={data}
+         value={'24 Yrs'}
         onChangeText={(val) =>  
-          this.setState({picker1: val})
+          this.setState({ageTo: val})
          } 
       /></View>
 
@@ -145,19 +234,21 @@ let data2 = [{
                 <View style={{width:"25%"}}><Text style={{marginTop:moderateScale(35), color :"#ff3f34"}}>Height From</Text></View>
                 <View style={{width:"25%"}}><Dropdown
                 containerStyle={{ width:"100%"}}
-        label='Education'
-        data={data}
+        label='From'
+        data={height}
+         value={'4F'}
         onChangeText={(val) =>  
-          this.setState({picker1: val})
+          this.setState({heightFrom: val})
          } 
       /></View>
                 <View style={{width:"25%"}}><Text style={{marginTop:moderateScale(35), marginLeft:moderateScale(45), color :"#ff3f34"}}>To</Text></View>
                 <View style={{width:"25%"}}><Dropdown
                 containerStyle={{ width:'100%'}}
-        label='Education'
-        data={data}
+        label='To'
+        value={'6F'}
+        data={height}
         onChangeText={(val) =>  
-          this.setState({picker1: val})
+          this.setState({heightTo: val})
          } 
       /></View>
 
@@ -165,17 +256,19 @@ let data2 = [{
              <Dropdown
                 containerStyle={{width:'90%', alignSelf:'center'}}
         label='Education'
-        data={data}
+        data={educationData}
+         value={'B.C.A'}
         onChangeText={(val) =>  
-          this.setState({picker1: val})
+          this.setState({education: val})
          } 
       />
            <Dropdown
                 containerStyle={{width:'90%', alignSelf:'center'}}
-        label='Search'
+        label='Gender'
         data={data2}
+         value={'Bride'}
         onChangeText={(val) =>  
-          this.setState({picker1: val})
+          this.setState({gender: val})
          } 
       />
            <TouchableOpacity style={{...styles.buttonBackground, marginTop:moderateScale(20)}} onPress={this.search.bind(this)}>

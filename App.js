@@ -213,10 +213,12 @@ const HomeStack = createStackNavigator({
     screen : Volume
   },
    Matrimonials : { screen: Leads
-  }
-  ,
+  },
   Login :{
 screen : Login
+  },
+    Referals : {
+    screen: Referals,
   },
  
 },
